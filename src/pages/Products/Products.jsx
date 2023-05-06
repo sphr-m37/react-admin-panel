@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import './products.css'
 
@@ -9,43 +9,40 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import { ProductModal } from '../../components/Modal/ProductModal';
 
 
+import { productContext } from '../../context/products/productContext'
+
 export const Products = () => {
 
-  useEffect(() => {
-    document.title = 'Admin panel | Products'
-  }, []);
+  const items = [{
+    id: 1,
+    title: 'shirt',
+    brand: 'puma',
+    img: './public/vite.svg',
+    price: 90
+  },
+  {
+    id: 2,
+    title: 'shirt',
+    brand: 'adidas',
+    img: './public/vite.svg',
+    price: 25
 
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      title: 'shirt',
-      brand: 'puma',
-      img: './public/vite.svg',
-      price: 90
-    },
-    {
-      id: 2,
-      title: 'shirt',
-      brand: 'adidas',
-      img: './public/vite.svg',
-      price: 25
+  },
+  {
+    id: 3,
+    title: 'hat',
+    brand: 'nike',
+    img: './public/vite.svg',
+    price: 50
+  },
+  {
+    id: 4,
+    title: 'coat',
+    brand: 'nike',
+    img: './public/vite.svg',
+    price: 260
+  }]
 
-    },
-    {
-      id: 3,
-      title: 'hat',
-      brand: 'nike',
-      img: './public/vite.svg',
-      price: 50
-    },
-    {
-      id: 4,
-      title: 'coat',
-      brand: 'nike',
-      img: './public/vite.svg',
-      price: 260
-    },
-  ])
   const columns = [
     { field: "id", headerName: "ID" },
     { field: "brand", headerName: "Brand", width: '120' },
@@ -78,13 +75,16 @@ export const Products = () => {
     },
   ]
 
+  useEffect(() => {
+    document.title = 'Admin panel | Products'
+  }, []);
+
+  const [products, setProducts] = useState(items)
   const [isEditing, setIsEditing] = useState(false)
   const [product, setProduct] = useState({})
   const [open, setOpen] = useState(false);
-
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
-
 
 
   const actionHandler = (id, mode = false) => {
@@ -98,6 +98,7 @@ export const Products = () => {
   const removeProductById = () => {
     setProducts(products.filter(item => item.id !== product.id))
     handleClose()
+    dispatch({ type: 'test' })
   }
 
   const editProduct = (newInfo) => {
