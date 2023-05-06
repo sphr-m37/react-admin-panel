@@ -1,0 +1,37 @@
+.alertText {
+    color: crimson;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+.blueSpan {
+    color: royalblue;
+}
+
+.userEditForm {
+    text-align: center;
+}
+
+#modal-modal-description {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+
+* {
+    text-transform: capitalize;
+}
+
+.btnBox {
+    margin-top: 15px;
+}
+
+.statusSelection {
+    padding: 5px 0;
+}
+
+.statusSelection option {
+    padding: 5px 0;
+}

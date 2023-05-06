@@ -1,0 +1,39 @@
+/*css reset */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*global style */
+img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: FiraSans, sans-serif, 'Courier New', Courier, monospace;
+    font-weight: normal;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    display: flex;
+}
+
+/* ::-webkit-scrollbar {
+} */
+
+/* font */
+
+@font-face {
+    font-family: FiraSans;
+    src: url(assets/fonts/FiraSans-ExtraBold.ttf);
+}

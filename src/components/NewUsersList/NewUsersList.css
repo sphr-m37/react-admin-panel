@@ -1,0 +1,70 @@
+.newUsersWrapper {
+    flex: 1;
+    padding: 15px;
+    /* margin: 20px 0; */
+    box-shadow: 0 5px 10px 2px gray;
+}
+
+.newUsersWrapper h4 {
+    margin: 10px;
+}
+
+.newUserList,
+.newUserItem {
+    list-style: none;
+}
+
+.newUserItem {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.newUserItem:hover {
+    background-color: #ebe9e9fa;
+}
+
+.newUserImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #333;
+}
+
+.newUserInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.newUserName {
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 600;
+}
+
+.newUserPosition {
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+.newUserItem button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.newUserItem:hover button {
+    color: rgba(255, 0, 0, 0.612);
+
+}
+
+/* .visitIcon:hover{
+    color: crimson;
+} */

@@ -1,0 +1,14 @@
+.home {
+    padding: 15px;
+    flex: 4;
+    overflow: hidden;
+}
+.newItems{
+    margin-top: 20px;
+    display: flex;
+}
+@media (max-width:1100px){
+    .newItems{
+        flex-direction: column;
+    }
+}
