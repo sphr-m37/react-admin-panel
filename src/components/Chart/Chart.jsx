@@ -1,5 +1,5 @@
 import React from 'react'
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts'
 
 import './Chart.css'
 export const Chart = ({ title, data, grid }) => {

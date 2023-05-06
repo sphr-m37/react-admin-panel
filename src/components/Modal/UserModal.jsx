@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
-
-import { FormGroup } from '@mui/material';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import TextField from '@mui/material/TextField';
-import { InputAdornment } from '@mui/material';
-
-import { AccountCircle } from '@mui/icons-material';
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
-
 import './Modal.css';
 
+import {
+    Box,
+    Modal,
+    Button,
+    TextField,
+    Typography,
+    InputAdornment
+} from '@mui/material';
+
+import { AccountCircle} from '@mui/icons-material';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 const style = {
     position: 'absolute',
     top: '50%',

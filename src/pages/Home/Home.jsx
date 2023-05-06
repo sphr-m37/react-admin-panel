@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 
 import './Home.css'
+
 import { Features } from '../../components/features/Features'
 import { Chart } from '../../components/Chart/Chart'
 

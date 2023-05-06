@@ -1,15 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './products.css'
 
-import { DataGrid } from '@mui/x-data-grid';
-
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { ProductModal } from '../../components/Modal/ProductModal';
+import { DataGrid } from '@mui/x-data-grid';
+import DeleteOutlineOutlinedIcon from 
+'@mui/icons-material/DeleteOutlineOutlined';
 
-
-import { productContext } from '../../context/products/productContext'
 
 export const Products = () => {
 

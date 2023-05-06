@@ -1,16 +1,12 @@
-import * as React from 'react';
-import { useState } from 'react';
-
-
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
-import { InputAdornment, MenuItem, Select } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import { FormControl, FormGroup, TextField } from '@mui/material';
-import { useEffect } from 'react';
-
-
+import React, { useState, useEffect } from 'react';
+import {
+    InputAdornment,
+    FormControl,
+    TextField,
+    Box, Modal,
+    Typography
+    , Button
+} from '@mui/material';
 
 const style = {
     position: 'absolute',

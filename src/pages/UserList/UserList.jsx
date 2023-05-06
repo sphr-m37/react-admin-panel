@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import './UserList.css'
 
-import { DataGrid } from '@mui/x-data-grid';
 
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-
 import { UserModal } from '../../components/Modal/UserModal'
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import { DataGrid } from
+'@mui/x-data-grid';
 
-import './UserList.css'
+
 
 
 export const UserList = () => {
