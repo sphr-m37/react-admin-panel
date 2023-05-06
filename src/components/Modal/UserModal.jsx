@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Modal.css';
 
 import {
@@ -10,8 +10,9 @@ import {
     InputAdornment
 } from '@mui/material';
 
-import { AccountCircle} from '@mui/icons-material';
+import { AccountCircle } from '@mui/icons-material';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import { userContext } from '../../context/user/userContext';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -24,17 +25,18 @@ const style = {
     p: 4,
 };
 
-export const UserModal = (props) => {
+export const UserModal = () => {
 
     const {
-        user,
-        user: { id, firstName, lastName, email },
-        removeUserById,
+        user: { firstName, lastName, email, img },
         editeHandler,
         handleClose,
+        removeUser,
         isEditing,
         open,
-    } = props
+        user,
+    } = useContext(userContext)
+
 
     const [newInfo, setNewInfo] = useState({ firstName: "", lastName: "", email: "" })
 
@@ -51,12 +53,6 @@ export const UserModal = (props) => {
         })
     }
 
-    const submitHandler = e => {
-        e.preventDefault()
-        editeHandler(newInfo)
-    }
-
-
     return (
         <div>
             <Modal
@@ -65,13 +61,14 @@ export const UserModal = (props) => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
+
                 {isEditing ?
                     <Box sx={style}>
                         <Typography id="modal-modal-title" variant="h6" component="h2">
                             Edit <span className='alertText blueSpan'>{firstName} {lastName}</span>
                         </Typography>
                         <form className='userEditForm'
-                            onSubmit={submitHandler}
+                            onSubmit={() => editeHandler(user, newInfo)}
                         >
                             <TextField
                                 id="standard-basic"
@@ -124,7 +121,7 @@ export const UserModal = (props) => {
 
                         <Button
                             className='modalButton'
-                            onClick={(e) => submitHandler(e, id)} >
+                            onClick={() => editeHandler(newInfo)} >
                             save
                         </Button>
 
@@ -142,13 +139,16 @@ export const UserModal = (props) => {
                             Are You Sure ?
                         </Typography>
                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            <img src={user.img} className='userAvatar' />
+                            <img src={img} className='userAvatar' />
                             <div>   Do You Want To Delete  <span className='alertText'>{firstName} {lastName}</span>
                             </div>
                         </Typography>
-                        <Button className='modalButton' onClick={removeUserById} >delete</Button>
-                        <Button className='modalButton' onClick={handleClose} >cancel</Button>
-                    </Box>}
+                        <Button className='modalButton'
+                            onClick={() => removeUser(newInfo)} >delete</Button>
+                        <Button className='modalButton'
+                            onClick={handleClose} >cancel</Button>
+                    </Box>
+                }
             </Modal>
         </div>
     );

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { userContext } from '../../context/user/userContext';
 import './UserList.css'
-
 
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 import { UserModal } from '../../components/Modal/UserModal'
@@ -13,53 +13,8 @@ import { DataGrid } from
 
 export const UserList = () => {
 
-  useEffect(() => {
-    document.title = 'Admin panel | Users'
-  }, []);
 
-
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      firstName: 'hadi',
-      lastName: 'kuhi',
-      email: '',
-      img: './public/vite.svg',
-      status: 'active',
-      transAction: 1200
-    },
-    {
-      id: 2,
-      firstName: 'sara',
-      lastName: 'azizi',
-      email: '',
-      img: './public/vite.svg',
-      status: 'non-active',
-      transAction: 0
-
-    },
-    {
-      id: 3,
-      firstName: 'mehdi',
-      lastName: 'karimi',
-      email: '',
-      img: './public/vite.svg',
-      status: 'active',
-      transAction: 1950
-    },
-    {
-      id: 4,
-      firstName: 'sina',
-      lastName: 'alizadeh',
-      email: '',
-      img: './public/vite.svg',
-      status: 'active',
-      transAction: 1560
-    },
-  ])
-
-
-  const columns = [
+const columns = [
     { field: 'id', headerName: "ID" },
     { field: 'firstName', headerName: "First Name", width: '150' },
     { field: 'lastName', headerName: "Last Name", width: '150' },
@@ -75,30 +30,23 @@ export const UserList = () => {
       field: 'actions', headerName: "actions",
       renderCell: (params) => {
         return <div className='usersAction'>
-          <DeleteOutlineOutlinedIcon onClick={() => actionHandler(params.row.id)} />
-          <ModeEditOutlinedIcon onClick={() => actionHandler(params.row.id, true)} />
+          <DeleteOutlineOutlinedIcon onClick={() => actionHandler(params.row)} />
+          <ModeEditOutlinedIcon onClick={() => actionHandler(params.row, true)} />
         </div>
       }
     },
-  ]
+]
+  
+  
+  useEffect(() => {
+    document.title = 'Admin panel | Users'
+  }, []);
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const [user, setUser] = useState({})
-  const [isEditing, setIsEditing] = useState(false)
-
-  const actionHandler = (userId, mode = false) => {
-    const user = users.find(user => user.id === userId)
-    setUser(user)
-    setIsEditing(mode)
-    handleOpen()
-  }
-
-  const removeUserById = () => {
-    setUsers(users.filter(item => item.id !== user.id))
-    handleClose()
-  }
+  const { actionHandler } = useContext(userContext)
+  const { users } = useContext(userContext)
+  const { open } = useContext(userContext)
+  const { handleClose } = useContext(userContext)
+ 
 
   const editeHandler = newInfo => {
     const editingUserIndex = users.findIndex(user => user.id === newInfo.id)
@@ -106,7 +54,6 @@ export const UserList = () => {
     newUsersList[editingUserIndex] = newInfo
     setUsers(newUsersList)
     handleClose()
-
   }
 
   return (
@@ -122,14 +69,7 @@ export const UserList = () => {
           },
         }}
       />
-      <UserModal
-        removeUserById={removeUserById}
-        setIsEditing={setIsEditing}
-        editeHandler={editeHandler}
-        handleClose={handleClose}
-        isEditing={isEditing}
-        user={user}
-        open={open} />
+      <UserModal />
     </div>
   )
 }
