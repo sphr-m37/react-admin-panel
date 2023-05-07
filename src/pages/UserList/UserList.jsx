@@ -42,20 +42,8 @@ const columns = [
     document.title = 'Admin panel | Users'
   }, []);
 
-  const { actionHandler } = useContext(userContext)
-  const { users } = useContext(userContext)
-  const { open } = useContext(userContext)
-  const { handleClose } = useContext(userContext)
+  const {users, actionHandler } = useContext(userContext)
  
-
-  const editeHandler = newInfo => {
-    const editingUserIndex = users.findIndex(user => user.id === newInfo.id)
-    const newUsersList = [...users]
-    newUsersList[editingUserIndex] = newInfo
-    setUsers(newUsersList)
-    handleClose()
-  }
-
   return (
     <div className='userList'>
       <DataGrid

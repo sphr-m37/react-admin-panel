@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { productContext } from '../../context/product/productContext';
+
 import {
     InputAdornment,
     FormControl,
@@ -20,37 +22,29 @@ const style = {
     p: 4
 };
 
+export const ProductModal = () => {
 
-export const ProductModal = ({ open, setOpen, product, removeProductById, isEditing, editProduct }) => {
+    const {
+        open,
+        product,
+        isEditing,
+        productEdit,
+        handleClose,
+        productRemove,
+    } = useContext(productContext)
 
-
-    const { id, title, brand, price, status } = product
-
-    const handleClose = () => setOpen(false);
-
-    const [newInfo, setnewInfo] = useState({ title: "", brand: "", price: '' });
+    const [newInfo, setnewInfo] = useState({});
 
     useEffect(() => {
-        if (product.id) {
+        if (product) {
             setnewInfo({ ...product })
         }
     }, [product])
-
-
 
     const onChangeHandler = e => {
         setnewInfo({
             ...newInfo, [e.target.name]: e.target.value
         })
-    }
-
-
-
-
-    const submitHandler = e => {
-        e.preventDefault()
-        editProduct(newInfo)
-        handleClose()
     }
 
 
@@ -72,14 +66,13 @@ export const ProductModal = ({ open, setOpen, product, removeProductById, isEdit
                         Edit <span className='alertText blueSpan'>{product.title}</span> Of <span className='alertText blueSpan'>{product.brand}</span>
                     </Typography>
 
-                    <form onSubmit={submitHandler}>
-
+                    <form >
                         <FormControl>
                             <TextField
                                 id="standard-basic"
                                 required
                                 label="title"
-                                defaultValue={title}
+                                defaultValue={product.title}
                                 name='title'
                                 variant="standard"
                                 onChange={onChangeHandler}
@@ -98,7 +91,7 @@ export const ProductModal = ({ open, setOpen, product, removeProductById, isEdit
                                 required
                                 label="brand"
                                 name='brand'
-                                defaultValue={brand}
+                                defaultValue={product.brand}
                                 variant="standard"
                                 onChange={onChangeHandler}
                                 InputProps={{
@@ -115,7 +108,7 @@ export const ProductModal = ({ open, setOpen, product, removeProductById, isEdit
                                 id="standard-basic"
                                 label="price"
                                 name='price'
-                                defaultValue={price}
+                                defaultValue={product.price}
                                 variant="standard"
                                 onChange={onChangeHandler}
                                 InputProps={{
@@ -134,11 +127,10 @@ export const ProductModal = ({ open, setOpen, product, removeProductById, isEdit
                             </Button>
                             <Button
                                 className='modalButton'
-                                type='submit'>
+                                onClick={() => productEdit(newInfo)}>
                                 save
                             </Button>
                         </div>
-
                     </form >
                 </Box>
                     :
@@ -153,7 +145,7 @@ export const ProductModal = ({ open, setOpen, product, removeProductById, isEdit
                             </div>
 
                         </Typography>
-                        <Button onClick={removeProductById} >delete</Button>
+                        <Button onClick={()=>productRemove(product)} >delete</Button>
                         <Button onClick={handleClose}>cancel</Button>
                     </Box>}
 

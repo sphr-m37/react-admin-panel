@@ -31,7 +31,7 @@ export const UserModal = () => {
         user: { firstName, lastName, email, img },
         editeHandler,
         handleClose,
-        removeUser,
+        userRemov,
         isEditing,
         open,
         user,
@@ -57,7 +57,11 @@ export const UserModal = () => {
         <div>
             <Modal
                 open={open}
-                onClose={handleClose}
+                onClose={() => {
+                    if (!isEditing) {
+                        handleClose()
+                    }
+                }}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -144,7 +148,7 @@ export const UserModal = () => {
                             </div>
                         </Typography>
                         <Button className='modalButton'
-                            onClick={() => removeUser(newInfo)} >delete</Button>
+                            onClick={() => userRemov(newInfo)} >delete</Button>
                         <Button className='modalButton'
                             onClick={handleClose} >cancel</Button>
                     </Box>

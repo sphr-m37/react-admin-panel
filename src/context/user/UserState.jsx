@@ -25,11 +25,10 @@ const userReducer = (state, action) => {
             const id = (action.payload.id)
             return { ...state, users: state.users.filter(user => user.id !== id) }
         case EDIT_USER:
-            const info = action.payload
-            console.log(info)
-            const editingUserIndex = state.users.findIndex(user => user.id === info.id)
+            const editedUser = action.payload
+            const editedUserIndex = state.users.findIndex(user => user.id === editedUser.id)
             const newUsers = [...state.users]
-            newUsers[editingUserIndex] = info
+            newUsers[editedUserIndex] = editedUser
             return {...state,users:[...newUsers]}
         default:
             return state
@@ -37,24 +36,24 @@ const userReducer = (state, action) => {
 }
 
 export const UserState = ({ children }) => {
+
     const [state, dispatch] = useReducer(userReducer, init)
 
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-    const [user, setUser] = useState({})
     const [isEditing, setIsEditing] = useState(false)
+    const [open, setOpen] = useState(false);
+    const [user, setUser] = useState({})
+    
+    const handleClose = () => setOpen(false);
+    const handleOpen = () => setOpen(true);
 
 
-
-    const actionHandler = (item, mode = false) => {
+    const actionHandler = (user, mode = false) => {
         handleOpen()
-        const user = state.users.find(user => user.id === item.id)
         setUser(user)
         setIsEditing(mode)
     }
 
-    const removeUser = user => {
+    const userRemov = user => {
         dispatch({ type: REMOVE_USER, payload: user })
         handleClose()
     }
@@ -70,7 +69,7 @@ export const UserState = ({ children }) => {
             actionHandler,
             editeHandler,
             handleClose,
-            removeUser,
+            userRemov,
             isEditing,
             open,
             user
