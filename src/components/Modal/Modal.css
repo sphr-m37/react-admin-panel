@@ -1,7 +1,7 @@
 .alertText {
     color: crimson;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 
@@ -11,6 +11,8 @@
 
 .userEditForm {
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 #modal-modal-description {
@@ -26,6 +28,7 @@
 
 .btnBox {
     margin-top: 15px;
+    display: flex;
 }
 
 .statusSelection {
@@ -34,4 +37,15 @@
 
 .statusSelection option {
     padding: 5px 0;
+}
+
+.productEditForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.productEditForm select {
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 18px;
 }

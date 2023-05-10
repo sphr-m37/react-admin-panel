@@ -1,4 +1,4 @@
-export const xAxisData = [
+export const saleData = [
     {
         name: 'jan',
         sale: 1520

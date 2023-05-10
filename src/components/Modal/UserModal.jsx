@@ -28,30 +28,37 @@ const style = {
 export const UserModal = () => {
 
     const {
-        user: { firstName, lastName, email, img },
         editeHandler,
         handleClose,
         userRemov,
         isEditing,
+        loading,
         open,
         user,
     } = useContext(userContext)
 
-
-    const [newInfo, setNewInfo] = useState({ firstName: "", lastName: "", email: "" })
+    const [newInfo, setNewInfo] = useState({})
 
     useEffect(() => {
-        if (user) {
+        if (user.name) {
             setNewInfo({ ...user })
         }
     }, [user])
 
 
     const onchangeHandler = e => {
-        setNewInfo({
-            ...newInfo, [e.target.name]: e.target.value
-        })
+        if (e.target.name === 'email') {
+            setNewInfo({
+                ...newInfo, email: e.target.value
+            })
+        } else {
+            setNewInfo({
+                ...newInfo, name: { ...newInfo.name, [e.target.name]: e.target.value }
+            })
+        }
     }
+
+
 
     return (
         <div>
@@ -69,7 +76,7 @@ export const UserModal = () => {
                 {isEditing ?
                     <Box sx={style}>
                         <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Edit <span className='alertText blueSpan'>{firstName} {lastName}</span>
+                            Edit <span className='alertText blueSpan'>{user.name.firstname} {user.name.lastname}</span>
                         </Typography>
                         <form className='userEditForm'
                             onSubmit={() => editeHandler(user, newInfo)}
@@ -77,9 +84,9 @@ export const UserModal = () => {
                             <TextField
                                 id="standard-basic"
                                 required label="first name"
-                                name='firstName'
+                                name='firstname'
                                 variant="standard"
-                                defaultValue={firstName}
+                                defaultValue={user.name.firstname}
                                 onChange={onchangeHandler}
                                 InputProps={{
                                     endAdornment: (
@@ -93,9 +100,9 @@ export const UserModal = () => {
                                 id="standard-basic"
                                 required
                                 label="last name"
-                                name='lastName'
+                                name='lastname'
                                 variant="standard"
-                                defaultValue={lastName}
+                                defaultValue={user.name.lastname}
                                 onChange={onchangeHandler}
                                 InputProps={{
                                     endAdornment: (
@@ -110,7 +117,7 @@ export const UserModal = () => {
                                 label="Email"
                                 name='email'
                                 variant="standard"
-                                defaultValue={email}
+                                defaultValue={user.email}
                                 onChange={onchangeHandler}
                                 helperText='example@email.com'
                                 InputProps={{
@@ -121,30 +128,34 @@ export const UserModal = () => {
                                     ),
                                 }}
                             />
+
+                            <div className='btnBox'>
+                                <Button
+                                    className='modalButton'
+                                    onClick={() => editeHandler(newInfo)} >
+                                    save
+                                </Button>
+
+                                <Button
+                                    className='modalButton'
+                                    onClick={handleClose} >
+                                    cancel
+                                </Button>
+                            </div>
                         </form>
-
-                        <Button
-                            className='modalButton'
-                            onClick={() => editeHandler(newInfo)} >
-                            save
-                        </Button>
-
-                        <Button
-                            className='modalButton'
-                            onClick={handleClose} >
-                            cancel
-                        </Button>
-
                     </Box>
                     :
-
                     <Box sx={style}>
                         <Typography id="modal-modal-title" variant="h6" component="h2">
                             Are You Sure ?
                         </Typography>
                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            <img src={img} className='userAvatar' />
-                            <div>   Do You Want To Delete  <span className='alertText'>{firstName} {lastName}</span>
+                            <img src='' alt={user?.username} className='userAvatar' />
+                            <div>Do You Want To Delete?
+                                <span className='alertText'>
+                                    {user?.name?.firstname},  
+                                    {user?.name?.lastname}
+                                </span>
                             </div>
                         </Typography>
                         <Button className='modalButton'

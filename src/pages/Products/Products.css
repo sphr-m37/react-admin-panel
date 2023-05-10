@@ -2,6 +2,12 @@
     flex: 4;
     padding: 10px;
     overflow-x: scroll;
+    position: relative;
+}
+.loader{
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .productAvatar {
@@ -12,3 +18,20 @@
     border-radius: 50%;
 }
 
+.usersAction {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.productTitle {
+    overflow-x: auto;
+}
+ .categotySelector{
+    width: 30%;
+    padding: 10px;
+    margin: 10px auto;
+    display: block;
+    font-size: 18px;
+ }
+ 

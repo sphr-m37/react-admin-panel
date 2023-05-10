@@ -1,7 +1,14 @@
 .userList {
     flex: 4;
-    padding: 15px;
+    padding: 10px;
     overflow-x: scroll;
+    position: relative;
+}
+
+.userList .loader {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .userAvatarWrapper {
@@ -28,9 +35,10 @@
     left: 0;
 }
 
-.usersAction > * {
+.usersAction>* {
     cursor: pointer;
 }
-.usersAction > *:hover {
+
+.usersAction>*:hover {
     color: crimson;
 }

@@ -1,39 +1,19 @@
-import { useReducer, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
+import axios from 'axios'
+
 import { userContext } from './userContext'
+import { userReducer } from './userReducer'
 
-import { EDIT_USER, REMOVE_USER } from '../types'
-
-
+import {
+EDIT_USER, GET_USERS,
+REMOVE_USER,SET_LOADING_TRUE} from '../types'
 
 const init = {
-    users: [
-        {
-            id: 1,
-            firstName: 'hadi',
-            lastName: 'kuhi',
-            email: '',
-            img: './public/vite.svg',
-            status: 'active',
-            transAction: 1200
-        }
-    ]
+    users: []
+    , loading: false
 }
 
-const userReducer = (state, action) => {
-    switch (action.type) {
-        case REMOVE_USER:
-            const id = (action.payload.id)
-            return { ...state, users: state.users.filter(user => user.id !== id) }
-        case EDIT_USER:
-            const editedUser = action.payload
-            const editedUserIndex = state.users.findIndex(user => user.id === editedUser.id)
-            const newUsers = [...state.users]
-            newUsers[editedUserIndex] = editedUser
-            return {...state,users:[...newUsers]}
-        default:
-            return state
-    }
-}
+
 
 export const UserState = ({ children }) => {
 
@@ -42,9 +22,19 @@ export const UserState = ({ children }) => {
     const [isEditing, setIsEditing] = useState(false)
     const [open, setOpen] = useState(false);
     const [user, setUser] = useState({})
-    
     const handleClose = () => setOpen(false);
     const handleOpen = () => setOpen(true);
+
+    useEffect(() => {
+        getAllUsers()
+    }, []);
+
+
+    const getAllUsers = async () => {
+        dispatch({ type: SET_LOADING_TRUE })
+        const { data } = await axios.get(`https://fakestoreapi.com/users`)
+        dispatch({ type: GET_USERS, payload: data })
+    }
 
 
     const actionHandler = (user, mode = false) => {
@@ -53,13 +43,19 @@ export const UserState = ({ children }) => {
         setIsEditing(mode)
     }
 
-    const userRemov = user => {
-        dispatch({ type: REMOVE_USER, payload: user })
+    const userRemov = async user => {
+        const res = await axios.delete(`https://fakestoreapi.com/users/${user.id}`)
+        if (res.status === 200) {
+            dispatch({ type: REMOVE_USER, payload: user.id })
+        }
         handleClose()
     }
 
-    const editeHandler = (info) => {
-        dispatch({ type: EDIT_USER, payload: info })
+    const editeHandler = async info => {
+        const res = await axios.put(`https://fakestoreapi.com/users/${info.id}`, { info })
+        if (res.status === 200) {
+            dispatch({ type: EDIT_USER, payload: info })
+        }
         handleClose()
     }
 

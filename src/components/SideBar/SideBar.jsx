@@ -16,6 +16,7 @@ import MarkunreadIcon from '@mui/icons-material/Markunread';
 import SendIcon from '@mui/icons-material/Send';
 import GradingIcon from '@mui/icons-material/Grading';
 import ChatIcon from '@mui/icons-material/Chat';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 
 export const SideBar = () => {
   return (
@@ -55,13 +56,13 @@ export const SideBar = () => {
           </h3>
           <ul className='sidebarList'>
             <li className='sidebarListItem'>
-              <NavLink to='/userslist' className={({ isActive }) => isActive ? 'active' : ''}>
+              <NavLink to='/usersList' className={({ isActive }) => isActive ? 'active' : ''}>
                 <PeopleAltOutlinedIcon className='sidebarIcon' />
                 <span>users</span>
               </NavLink>
             </li>
             <li className='sidebarListItem'>
-              <NavLink to='/newuser' className={({ isActive }) => isActive ? 'active' : ''}>
+              <NavLink to='/new-user' className={({ isActive }) => isActive ? 'active' : ''}>
                 <PersonAddAltOutlinedIcon className='sidebarIcon' />
                 <span>New User</span>
               </NavLink>
@@ -70,6 +71,12 @@ export const SideBar = () => {
               <NavLink to='/products' className={({ isActive }) => isActive ? 'active' : ''}>
                 <StoreIcon className='sidebarIcon' />
                 <span>Products</span>
+              </NavLink>
+            </li>
+            <li className='sidebarListItem'>
+              <NavLink to='/new-product/' className={({ isActive }) => isActive ? 'active' : ''}>
+                <AddBusinessIcon className='sidebarIcon' />
+                <span>New Product</span>
               </NavLink>
             </li>
             <li className='sidebarListItem'>

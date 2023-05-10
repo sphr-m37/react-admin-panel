@@ -1,0 +1,13 @@
+export const GET_PRODUCT_CATEGORIES = 'GET_PRODUCT_CATEGORIES';
+export const GET_PRODUCTS = 'GET_PRODUCTS';
+export const PRODUCT_REMOVE = 'PRODUCT_REMOVE';
+export const PRODUCT_EDITE = 'PRODUCT_EDITE';
+
+
+
+export const GET_USERS = 'GET_USERS';
+export const EDIT_USER = 'EDIT_USER';
+export const REMOVE_USER = 'REMOVE_USER';
+
+
+export const SET_LOADING_TRUE = 'SET_LOADING_TRUE';

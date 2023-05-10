@@ -23,7 +23,7 @@ const style = {
 };
 
 export const ProductModal = () => {
-
+    const [shortTitle, setShortTitle] = useState('')
     const {
         open,
         product,
@@ -31,13 +31,15 @@ export const ProductModal = () => {
         productEdit,
         handleClose,
         productRemove,
+        productCategories
     } = useContext(productContext)
 
     const [newInfo, setnewInfo] = useState({});
 
     useEffect(() => {
-        if (product) {
+        if (product.id) {
             setnewInfo({ ...product })
+            setShortTitle(product.title.split(' ').splice(0, 3).join(' '))
         }
     }, [product])
 
@@ -46,8 +48,6 @@ export const ProductModal = () => {
             ...newInfo, [e.target.name]: e.target.value
         })
     }
-
-
     return (
         <div>
             <Modal
@@ -63,43 +63,19 @@ export const ProductModal = () => {
 
                 {isEditing ? <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Edit <span className='alertText blueSpan'>{product.title}</span> Of <span className='alertText blueSpan'>{product.brand}</span>
+                        Edit <span className='alertText blueSpan'>{shortTitle}</span> Of <span className='alertText blueSpan'>{product.category}</span>
                     </Typography>
 
-                    <form >
+                    <form className='productEditForm' >
                         <FormControl>
                             <TextField
                                 id="standard-basic"
                                 required
                                 label="title"
-                                defaultValue={product.title}
+                                defaultValue={product.title.split(' ').splice(0, 3).join(' ')}
                                 name='title'
                                 variant="standard"
                                 onChange={onChangeHandler}
-                                InputProps={{
-                                    endAdornment: (
-                                        <InputAdornment position="start">
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                        </FormControl>
-
-                        <FormControl>
-                            <TextField
-                                id="standard-basic"
-                                required
-                                label="brand"
-                                name='brand'
-                                defaultValue={product.brand}
-                                variant="standard"
-                                onChange={onChangeHandler}
-                                InputProps={{
-                                    endAdornment: (
-                                        <InputAdornment position="start">
-                                        </InputAdornment>
-                                    ),
-                                }}
                             />
                         </FormControl>
 
@@ -111,14 +87,18 @@ export const ProductModal = () => {
                                 defaultValue={product.price}
                                 variant="standard"
                                 onChange={onChangeHandler}
-                                InputProps={{
-                                    endAdornment: (
-                                        <InputAdornment position="start">
-                                        </InputAdornment>
-                                    ),
-                                }}
                             />
                         </FormControl>
+
+                        <FormControl>
+
+                            <select name='category' defaultValue={product.category} onChange={onChangeHandler}>
+                                {productCategories.map((item, index) => <option
+                                    value={item} key={index}>{item}</option>)}
+                            </select>
+
+                        </FormControl>
+
                         <div className='btnBox'>
                             <Button
                                 className='modalButton'
@@ -140,12 +120,12 @@ export const ProductModal = () => {
                         </Typography>
                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
 
-                            <img src={product.img} className='productAvatar' alt="" />
-                            <div>   Do You Want To Delete  <span className='alertText'>{product.title}</span> of  <span className='alertText'>{product.brand}</span>  brand ?
+                            <img src={newInfo.image} className='productAvatar' alt="" />
+                            <div>   Do You Want To Delete  <span className='alertText'>{shortTitle}</span> of  <span className='alertText'>{product.category}</span>  category ?
                             </div>
 
                         </Typography>
-                        <Button onClick={()=>productRemove(product)} >delete</Button>
+                        <Button onClick={() => productRemove(product)} >delete</Button>
                         <Button onClick={handleClose}>cancel</Button>
                     </Box>}
 

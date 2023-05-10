@@ -28,8 +28,24 @@ a {
     display: flex;
 }
 
-/* ::-webkit-scrollbar {
-} */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #edecf1;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #4d4a4a;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: crimson;
+
+}
 
 /* font */
 
