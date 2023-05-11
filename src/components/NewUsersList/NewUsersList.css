@@ -1,5 +1,5 @@
 .newUsersWrapper {
-    flex: 1;
+    flex: 2;
     padding: 15px;
     /* margin: 20px 0; */
     box-shadow: 0 5px 10px 2px gray;
@@ -12,6 +12,8 @@
 .newUserList,
 .newUserItem {
     list-style: none;
+    width: 100%;
+    min-width: 320px;
 }
 
 .newUserItem {
@@ -68,3 +70,11 @@
 /* .visitIcon:hover{
     color: crimson;
 } */
+
+@media (max-width:1100px) {
+    .newUsersWrapper {
+        margin-left: 0px;
+        margin-top: 20px;
+        overflow: auto;
+    }
+}

@@ -29,6 +29,7 @@
 }
  .categotySelector{
     width: 30%;
+    min-width: 200px;
     padding: 10px;
     margin: 10px auto;
     display: block;

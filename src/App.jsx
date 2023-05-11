@@ -1,4 +1,5 @@
 import React from 'react'
+import './App.css'
 
 import { routes } from './routes'
 import { useRoutes } from 'react-router-dom'
@@ -13,11 +14,11 @@ export const App = () => {
   return (
     <UserState>
       <ProductState>
-      <NavBar />
-      <div className='container'>
-        <SideBar />
-       {router}
-      </div>
+        <NavBar />
+        <div className='container'>
+          <SideBar />
+           {router}
+        </div>
       </ProductState>
     </UserState>
   )

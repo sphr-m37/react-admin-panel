@@ -1,14 +1,14 @@
 .sidebar {
-    min-width: 150px;
-    flex: 1;
-    height: 100vh;
     height: calc(100vh - 50px);
+    width: 200px;
     padding: 10px;
     position: sticky;
     top: 50px;
-    left: 0;
+    left: 0px;
     background-color: #bbb6b6;
     overflow-y: scroll;
+    transition: 0.5s;
+    z-index: 999;
 }
 
 /* .sidebarWrapper {
@@ -16,6 +16,7 @@
 
 .sidebarMenu {
     margin-top: 20px;
+
 }
 
 .sidebarMenu:first-child {
@@ -31,14 +32,13 @@
     list-style: none;
 }
 
-.sidebarListItem a {
-    margin: 5px 0;
-    border-radius: 10px;
-    cursor: pointer;
-}
 
 .sidebarListItem a {
+    margin: 5px 0 !important;
+    border-radius: 10px;
+    cursor: pointer;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 5px;
 }
@@ -47,20 +47,34 @@
 .sidebarListItem a.active {
     background-color: gray;
     color: white;
-
 }
 
-.sidebarIcon {
-    margin-right: 5px;
-}
 
 .sidebarIcon+span {
     font-size: 14px;
 }
 
-/* responsive */
-@media (max-width : 900px) {
-    /* .sidebar {
-       
-} */
+.iconBox {
+    padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+    position: sticky;
+    top: 0;
+    right: 0;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.closeMenu {
+    margin-right: -150px;
+    transform: translateX(-150px);
+}
+
+.closeMenuIconBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

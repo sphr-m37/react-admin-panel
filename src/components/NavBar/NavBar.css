@@ -5,13 +5,14 @@
     position: sticky;
     top: 0;
     left: 0;
+    border-bottom: 1px solid #333;
     /* z-index: 99999; */
 }
 
 .navbarWrapper {
     height: 100%;
     background-color: pink;
-    padding: 10px ;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -58,4 +59,19 @@
     color: white;
     padding: 2px 3px;
     border-radius: 50%;
+}
+
+@media (max-width:500px) {
+    .logo {
+        font-size: 20px;
+    }
+
+    .avatar {
+        width: 30px;
+        width: 30px;
+        margin-left: 0;
+    }
+        .navBarIcons {
+            margin-right: 5px;
+        }
 }

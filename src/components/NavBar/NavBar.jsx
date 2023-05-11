@@ -11,10 +11,11 @@ export const NavBar = () => {
         <div className='navbar'>
             <div className='navbarWrapper'>
 
+
                 <div className='logo'>
                     PINKI SHOP
                 </div>
-
+                
                 <div className='navbarRight'>
 
                     <div className='navBarIcons'>
